@@ -5,10 +5,9 @@ import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 
 export default function App() {
-  const [todoId, setTodosId] = useState('1');
+  const [todoId, setTodosId] = useState(null);
   const [todos, setTodos] = useState([
-    { id: '1', title: 'პირველი პოსტი' },
-    { id: '2', title: 'მეორე პოსტი' }
+    { id: '1', title: 'პირველი პოსტი' }
   ]);
   const addTodo = title => {
     setTodos(prev => [
