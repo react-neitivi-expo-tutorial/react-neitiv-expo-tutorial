@@ -8,6 +8,7 @@ import {
   Alert
 } from 'react-native';
 import { THEME } from '../theme';
+import { AppButton } from '../ui/AppButton';
 
 export const EditModal = ({ value, visiblle, onCencel, onSave }) => {
   const [title, setTitle] = useState(value);
@@ -20,7 +21,7 @@ export const EditModal = ({ value, visiblle, onCencel, onSave }) => {
         } სიმბოლო.`
       );
     } else {
-        onSave(title);
+      onSave(title);
     }
   };
 
@@ -37,12 +38,16 @@ export const EditModal = ({ value, visiblle, onCencel, onSave }) => {
           maxLength={64}
         />
         <View style={styles.buttoms}>
-          <Button
+          <AppButton onPress={onCencel} color={THEME.DANGER_COLOR}>
+            უარყოფა
+          </AppButton>
+          {/* <Button
             title="უარყოფა"
             onPress={onCencel}
             color={THEME.DANGER_COLOR}
-          />
-          <Button title="შენახვა" onPress={saveHendler} />
+          /> */}
+          <AppButton onPress={saveHendler}>შენახვა</AppButton>
+          {/* <Button title="შენახვა" onPress={saveHendler} /> */}
         </View>
       </View>
     </Modal>

@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 
+async function loadApplication() {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf')
+  });
+}
+
 export default function App() {
+  const [isReady, setIsReady] = useState(false);
   const [todoId, setTodosId] = useState(null);
-  const [todos, setTodos] = useState([
-    { id: '1', title: 'პირველი პოსტი' }
-  ]);
+  const [todos, setTodos] = useState([{ id: '1', title: 'პირველი პოსტი' }]);
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={err => console.log(err)}
+        onFinish={() => setIsReady(true)}
+      />
+    );
+  }
   const addTodo = title => {
     setTodos(prev => [
       ...prev,
       {
         id: Date.now().toString(),
-        title: title
+        title
       }
     ]);
   };
@@ -42,13 +60,15 @@ export default function App() {
     );
   };
 
-  const updateTodo = (id,title) =>{
-    setTodos(old => old.map(todo => {
-      if(todo.id === id) {
-        todo.title = title
-      }
-      return todo
-    }))
+  const updateTodo = (id, title) => {
+    setTodos(old =>
+      old.map(todo => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+        return todo;
+      })
+    );
   };
 
   let content = (
