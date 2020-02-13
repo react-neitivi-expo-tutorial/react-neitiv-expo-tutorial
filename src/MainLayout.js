@@ -14,11 +14,15 @@ export const MainLayout = () => {
   const styles = StyleSheet.create({
     container: {
       paddingHorizontal: THEME.PADDING_HORIZONTAL,
-      paddingVertical: 20
+      paddingVertical: 20,
+      flex: 1
+    },
+    wraper: {
+      flex: 1
     }
   });
   return (
-    <View>
+    <View style={styles.wraper}>
       <Navbar title="Todo App!" />
       <View style={styles.container}>
         {todoId ? <TodoScreen /> : <MainScreen />}
